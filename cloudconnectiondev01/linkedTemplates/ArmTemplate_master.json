@@ -1,0 +1,90 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "cloudconnectiondev01"
+		},
+		"Cloudconnectionsql_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Cloudconnectionsql'"
+		},
+		"LS_cloudconnectiongen2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://cloudconnectiongen2.dfs.core.windows.net/"
+		},
+		"keyvault_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://keyvaultdev102.vault.azure.net/"
+		},
+		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/61a64ecf-f753-4559-8b03-b239b58cad65/resourcegroups/DemoResource101/providers/Microsoft.DataFactory/factories/DemoDataF101/integrationruntimes/integrationRuntime101"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "cloudconnectiondev01_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Cloudconnectionsql_connectionString": {
+						"value": "[parameters('Cloudconnectionsql_connectionString')]"
+					},
+					"keyvault_properties_typeProperties_baseUrl": {
+						"value": "[parameters('keyvault_properties_typeProperties_baseUrl')]"
+					},
+					"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
+						"value": "[parameters('integrationRuntime1_properties_typeProperties_linkedInfo_resourceId')]"
+					},
+					"LS_cloudconnectiongen2_properties_typeProperties_url": {
+						"value": "[parameters('LS_cloudconnectiongen2_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "cloudconnectiondev01_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'cloudconnectiondev01_ArmTemplate_0')]"
+			]
+		}
+	]
+}

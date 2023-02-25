@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "cloudconnectiondev01"
+		},
+		"Cloudconnectionsql_connectionString": {
+			"value": ""
+		},
+		"LS_cloudconnectiongen2_properties_typeProperties_url": {
+			"value": "https://cloudconnectiongen2.dfs.core.windows.net/"
+		},
+		"keyvault_properties_typeProperties_baseUrl": {
+			"value": "https://keyvaultdev102.vault.azure.net/"
+		},
+		"integrationRuntime1_properties_typeProperties_linkedInfo_resourceId": {
+			"value": "/subscriptions/61a64ecf-f753-4559-8b03-b239b58cad65/resourcegroups/DemoResource101/providers/Microsoft.DataFactory/factories/DemoDataF101/integrationruntimes/integrationRuntime101"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
