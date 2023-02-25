@@ -1,0 +1,17 @@
+{
+	"name": "sqlcopysink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Cloudconnectionsql",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "department_new"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
